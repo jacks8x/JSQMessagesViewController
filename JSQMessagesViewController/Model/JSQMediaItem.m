@@ -101,7 +101,7 @@
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:view isOutgoing:self.appliesMediaViewMaskAsOutgoing];
         self.cachedPlaceholderView = view;
     }
-    
+
     return self.cachedPlaceholderView;
 }
 

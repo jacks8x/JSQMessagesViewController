@@ -49,7 +49,7 @@
  *
  *  @return An initialized `JSQMessagesAvatarImage` object if created successfully, `nil` otherwise.
  */
-+ (JSQMessagesAvatarImage *)avatarImageWithImage:(UIImage *)image diameter:(NSUInteger)diameter;
++ (JSQMessagesAvatarImage *)avatarImageWithImageURL:(NSString *)imageURL diameter:(NSUInteger)diameter;
 
 /**
  *  Returns a copy of the specified image that is cropped to a circle with the given diameter.
@@ -90,10 +90,10 @@
  *  However, a font size `30.0f` and diameter of `10.0f` will not produce a desirable image.
  *  Further, this method does not check the length of userInitials. It is recommended that you pass a string of length `2` or `3`.
  */
-+ (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
-                                        backgroundColor:(UIColor *)backgroundColor
-                                              textColor:(UIColor *)textColor
-                                                   font:(UIFont *)font
-                                               diameter:(NSUInteger)diameter;
+//+ (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
+//                                        backgroundColor:(UIColor *)backgroundColor
+//                                              textColor:(UIColor *)textColor
+//                                                   font:(UIFont *)font
+//                                               diameter:(NSUInteger)diameter;
 
 @end

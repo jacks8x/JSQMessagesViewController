@@ -185,13 +185,14 @@
             if ([copyMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
                 JSQPhotoMediaItem *photoItemCopy = [((JSQPhotoMediaItem *)copyMediaData) copy];
                 photoItemCopy.appliesMediaViewMaskAsOutgoing = NO;
-                newMediaAttachmentCopy = [UIImage imageWithCGImage:photoItemCopy.image.CGImage];
+//                newMediaAttachmentCopy = [UIImage imageWithCGImage:photoItemCopy.image.CGImage];
+                newMediaAttachmentCopy = photoItemCopy.imageURL.copy;
                 
                 /**
                  *  Set image to nil to simulate "downloading" the image
                  *  and show the placeholder view
                  */
-                photoItemCopy.image = nil;
+//                photoItemCopy.imageURL = nil;
                 
                 newMediaData = photoItemCopy;
             }
@@ -263,7 +264,7 @@
                  */
                 
                 if ([newMediaData isKindOfClass:[JSQPhotoMediaItem class]]) {
-                    ((JSQPhotoMediaItem *)newMediaData).image = newMediaAttachmentCopy;
+                    ((JSQPhotoMediaItem *)newMediaData).imageURL = newMediaAttachmentCopy;
                     [self.collectionView reloadData];
                 }
                 else if ([newMediaData isKindOfClass:[JSQLocationMediaItem class]]) {
@@ -646,17 +647,17 @@
 
 - (BOOL)composerTextView:(JSQMessagesComposerTextView *)textView shouldPasteWithSender:(id)sender
 {
-    if ([UIPasteboard generalPasteboard].image) {
-        // If there's an image in the pasteboard, construct a media item with that image and `send` it.
-        JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIPasteboard generalPasteboard].image];
-        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:self.senderId
-                                                 senderDisplayName:self.senderDisplayName
-                                                              date:[NSDate date]
-                                                             media:item];
-        [self.demoData.messages addObject:message];
-        [self finishSendingMessage];
-        return NO;
-    }
+//    if ([UIPasteboard generalPasteboard].image) {
+//        // If there's an image in the pasteboard, construct a media item with that image and `send` it.
+//        JSQPhotoMediaItem *item = [[JSQPhotoMediaItem alloc] initWithImage:[UIPasteboard generalPasteboard].image];
+//        JSQMessage *message = [[JSQMessage alloc] initWithSenderId:self.senderId
+//                                                 senderDisplayName:self.senderDisplayName
+//                                                              date:[NSDate date]
+//                                                             media:item];
+//        [self.demoData.messages addObject:message];
+//        [self finishSendingMessage];
+//        return NO;
+//    }
     return YES;
 }
 

@@ -34,14 +34,15 @@
     return [JSQMessagesAvatarImage avatarImageWithPlaceholder:circlePlaceholderImage];
 }
 
-+ (JSQMessagesAvatarImage *)avatarImageWithImage:(UIImage *)image diameter:(NSUInteger)diameter
++ (JSQMessagesAvatarImage *)avatarImageWithImageURL:(NSString *)imageURL diameter:(NSUInteger)diameter
 {
-    UIImage *avatar = [JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter];
-    UIImage *highlightedAvatar = [JSQMessagesAvatarImageFactory circularAvatarHighlightedImage:image withDiameter:diameter];
+//    UIImage *avatar = [JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter];
+//    UIImage *highlightedAvatar = [JSQMessagesAvatarImageFactory circularAvatarHighlightedImage:image withDiameter:diameter];
 
-    return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:avatar
-                                              highlightedImage:highlightedAvatar
-                                              placeholderImage:avatar];
+    return [[JSQMessagesAvatarImage alloc] initWithAvatarImageURL:imageURL
+                                              highlightedImageURL:imageURL
+                                              placeholderImage:nil
+                                                         diameter:diameter];
 }
 
 + (UIImage *)circularAvatarImage:(UIImage *)image withDiameter:(NSUInteger)diameter
@@ -58,26 +59,26 @@
                                            highlightedColor:[UIColor colorWithWhite:0.1f alpha:0.3f]];
 }
 
-+ (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
-                                        backgroundColor:(UIColor *)backgroundColor
-                                              textColor:(UIColor *)textColor
-                                                   font:(UIFont *)font
-                                               diameter:(NSUInteger)diameter
-{
-    UIImage *avatarImage = [JSQMessagesAvatarImageFactory jsq_imageWitInitials:userInitials
-                                                               backgroundColor:backgroundColor
-                                                                     textColor:textColor
-                                                                          font:font
-                                                                      diameter:diameter];
-
-    UIImage *avatarHighlightedImage = [JSQMessagesAvatarImageFactory jsq_circularImage:avatarImage
-                                                                          withDiameter:diameter
-                                                                      highlightedColor:[UIColor colorWithWhite:0.1f alpha:0.3f]];
-
-    return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:avatarImage
-                                              highlightedImage:avatarHighlightedImage
-                                              placeholderImage:avatarImage];
-}
+//+ (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
+//                                        backgroundColor:(UIColor *)backgroundColor
+//                                              textColor:(UIColor *)textColor
+//                                                   font:(UIFont *)font
+//                                               diameter:(NSUInteger)diameter
+//{
+//    UIImage *avatarImage = [JSQMessagesAvatarImageFactory jsq_imageWitInitials:userInitials
+//                                                               backgroundColor:backgroundColor
+//                                                                     textColor:textColor
+//                                                                          font:font
+//                                                                      diameter:diameter];
+//
+//    UIImage *avatarHighlightedImage = [JSQMessagesAvatarImageFactory jsq_circularImage:avatarImage
+//                                                                          withDiameter:diameter
+//                                                                      highlightedColor:[UIColor colorWithWhite:0.1f alpha:0.3f]];
+//
+//    return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:avatarImage
+//                                              highlightedImage:avatarHighlightedImage
+//                                              placeholderImage:avatarImage];
+//}
 
 #pragma mark - Private
 

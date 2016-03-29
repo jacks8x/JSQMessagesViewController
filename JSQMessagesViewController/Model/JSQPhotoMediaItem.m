@@ -33,12 +33,11 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithImage:(UIImage *)image
+- (instancetype)initWithImageURL:(NSString *)imageURL
 {
     self = [super init];
     if (self) {
-        _image = [image copy];
-        _cachedImageView = nil;
+        _imageURL = [imageURL copy];
     }
     return self;
 }
@@ -46,60 +45,58 @@
 - (void)clearCachedMediaViews
 {
     [super clearCachedMediaViews];
-    _cachedImageView = nil;
 }
 
 #pragma mark - Setters
 
-- (void)setImage:(UIImage *)image
+- (void)setImageURL:(NSString *)imageURL
 {
-    _image = [image copy];
-    _cachedImageView = nil;
+    _imageURL = [imageURL copy];
 }
 
 - (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing
 {
     [super setAppliesMediaViewMaskAsOutgoing:appliesMediaViewMaskAsOutgoing];
-    _cachedImageView = nil;
 }
 
 #pragma mark - JSQMessageMediaData protocol
 
 - (UIView *)mediaView
 {
-    if (self.image == nil) {
-        return nil;
-    }
+//    if (self.imageURL == nil) {
+//        return nil;
+//    }
+//    
+//    if (self.cachedImageView == nil) {
+//        CGSize size = [self mediaViewDisplaySize];
+//        UIImageView *imageView = [[UIImageView alloc] initWithImage:self.image];
+//        imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
+//        imageView.contentMode = UIViewContentModeScaleAspectFill;
+//        imageView.clipsToBounds = YES;
+//        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
+//        self.cachedImageView = imageView;
+//    }
+//    
+//    return self.cachedImageView;
     
-    if (self.cachedImageView == nil) {
-        CGSize size = [self mediaViewDisplaySize];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:self.image];
-        imageView.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.clipsToBounds = YES;
-        [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
-        self.cachedImageView = imageView;
-    }
+    CGSize size = [self mediaViewDisplaySize];
+    NSLog(@"[JSQPhotoMediaItem:83] Size: %f, %f", size.width, size.height);
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, size.width, size.height)];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = YES;
+    [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:imageView isOutgoing:self.appliesMediaViewMaskAsOutgoing];
+    NSLog(@"[JSQPhotoMediaItem:88] imageView Size: %f, %f", imageView.frame.size.width, imageView.frame.size.height);
+    self.cachedImageView = imageView;
     
     return self.cachedImageView;
 }
 
-- (NSUInteger)mediaHash
-{
-    return self.hash;
-}
-
 #pragma mark - NSObject
-
-- (NSUInteger)hash
-{
-    return super.hash ^ self.image.hash;
-}
 
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@: image=%@, appliesMediaViewMaskAsOutgoing=%@>",
-            [self class], self.image, @(self.appliesMediaViewMaskAsOutgoing)];
+            [self class], self.imageURL, @(self.appliesMediaViewMaskAsOutgoing)];
 }
 
 #pragma mark - NSCoding
@@ -108,7 +105,7 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _image = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(image))];
+        _imageURL = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(imageURL))];
     }
     return self;
 }
@@ -116,14 +113,14 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
     [super encodeWithCoder:aCoder];
-    [aCoder encodeObject:self.image forKey:NSStringFromSelector(@selector(image))];
+    [aCoder encodeObject:self.imageURL forKey:NSStringFromSelector(@selector(imageURL))];
 }
 
 #pragma mark - NSCopying
 
 - (instancetype)copyWithZone:(NSZone *)zone
 {
-    JSQPhotoMediaItem *copy = [[JSQPhotoMediaItem allocWithZone:zone] initWithImage:self.image];
+    JSQPhotoMediaItem *copy = [[JSQPhotoMediaItem allocWithZone:zone] initWithImageURL:self.imageURL];
     copy.appliesMediaViewMaskAsOutgoing = self.appliesMediaViewMaskAsOutgoing;
     return copy;
 }

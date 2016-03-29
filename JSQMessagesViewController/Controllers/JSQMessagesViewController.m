@@ -16,6 +16,8 @@
 //  Released under an MIT license: http://opensource.org/licenses/MIT
 //
 
+#import <AFNetworking/AFNetworking.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 #import "JSQMessagesViewController.h"
 
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
@@ -23,6 +25,7 @@
 #import "JSQMessageData.h"
 #import "JSQMessageBubbleImageDataSource.h"
 #import "JSQMessageAvatarImageDataSource.h"
+#import "JSQMessagesAvatarImageFactory.h"
 
 #import "JSQMessagesCollectionViewCellIncoming.h"
 #import "JSQMessagesCollectionViewCellOutgoing.h"
@@ -39,6 +42,8 @@
 #import "UIDevice+JSQMessages.h"
 #import "NSBundle+JSQMessages.h"
 
+#import "JSQPhotoMediaItem.h"
+#import "JSQMessagesMediaViewBubbleImageMasker.h"
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
 
@@ -479,8 +484,28 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
     }
     else {
         id<JSQMessageMediaData> messageMedia = [messageItem media];
-        cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
-        NSParameterAssert(cell.mediaView != nil);
+        if ([messageMedia isKindOfClass:[JSQPhotoMediaItem class]]) {
+            NSString *imageURL = [(JSQPhotoMediaItem *)messageMedia imageURL];
+            UIView *mediaPlaceholderView = [messageMedia mediaPlaceholderView];
+            __block CGRect mediaViewRect = mediaPlaceholderView.frame;
+            [cell setMediaView:mediaPlaceholderView];
+            [cell.mediaView setFrame:mediaViewRect];
+            cell.cachedMediaView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, cell.mediaView.frame.size.width, cell.mediaView.frame.size.height)];
+            __weak JSQMessagesCollectionViewCell *weakCell = cell;
+            [(UIImageView *)cell.cachedMediaView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageURL]] placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+                [((UIImageView *)weakCell.cachedMediaView) setImage:image];
+                [weakCell.cachedMediaView setFrame:CGRectMake(2, 2, mediaViewRect.size.width, mediaViewRect.size.height)];
+                
+                [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:(UIImageView *)weakCell.cachedMediaView isOutgoing:isOutgoingMessage];
+                weakCell.mediaView = weakCell.cachedMediaView;
+            } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+                
+            }];
+        }
+        else {
+            cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
+            NSParameterAssert(cell.mediaView != nil);
+        }
     }
 
     BOOL needsAvatar = YES;
@@ -496,14 +521,16 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         avatarImageDataSource = [collectionView.dataSource collectionView:collectionView avatarImageDataForItemAtIndexPath:indexPath];
         if (avatarImageDataSource != nil) {
 
-            UIImage *avatarImage = [avatarImageDataSource avatarImage];
-            if (avatarImage == nil) {
-                cell.avatarImageView.image = [avatarImageDataSource avatarPlaceholderImage];
+            NSString *avatarImageURL = [avatarImageDataSource avatarImageURL];
+            NSUInteger diameter = [avatarImageDataSource diameter];
+            if (avatarImageURL != nil) {
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:avatarImageURL]];
+                [cell.avatarImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+                    [cell.avatarImageView setImage:[JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter]];
+                } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+                    
+                }];
                 cell.avatarImageView.highlightedImage = nil;
-            }
-            else {
-                cell.avatarImageView.image = avatarImage;
-                cell.avatarImageView.highlightedImage = [avatarImageDataSource avatarHighlightedImage];
             }
         }
     }

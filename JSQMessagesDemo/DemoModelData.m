@@ -49,20 +49,17 @@
          *
          *  If you are not using avatars, ignore this.
          */
-        JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithUserInitials:@"JSQ"
-                                                                                      backgroundColor:[UIColor colorWithWhite:0.85f alpha:1.0f]
-                                                                                            textColor:[UIColor colorWithWhite:0.60f alpha:1.0f]
-                                                                                                 font:[UIFont systemFontOfSize:14.0f]
-                                                                                             diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *cookImage = [JSQMessagesAvatarImageFactory avatarImageWithImageURL:@"http://a2.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTE5NDg0MDU1MzM0OTc5MDg3.jpg"
+                                                                                          diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *jobsImage = [JSQMessagesAvatarImageFactory avatarImageWithImageURL:@"https://pbs.twimg.com/profile_images/89328493/stevejobs.jpg"
+                                                                                          diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        JSQMessagesAvatarImage *cookImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_cook"]
-                                                                                       diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImageFactory avatarImageWithImageURL:@"http://celebirthdays.net/cdn/thumbs/large/steve-wozniak.jpg"
+                                                                                         diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
-        JSQMessagesAvatarImage *jobsImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_jobs"]
-                                                                                       diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-        
-        JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"demo_avatar_woz"]
-                                                                                      diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithImageURL:@"http://cdn.business2community.com/wp-content/uploads/2014/04/profile-picture.jpg"
+                                                                                         diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+
         
         self.avatars = @{ kJSQDemoAvatarIdSquires : jsqImage,
                           kJSQDemoAvatarIdCook : cookImage,
@@ -158,7 +155,7 @@
 
 - (void)addPhotoMediaMessage
 {
-    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImage:[UIImage imageNamed:@"goldengate"]];
+    JSQPhotoMediaItem *photoItem = [[JSQPhotoMediaItem alloc] initWithImageURL:@"https://media.timeout.com/images/101714767/617/347/image.jpg"];
     JSQMessage *photoMessage = [JSQMessage messageWithSenderId:kJSQDemoAvatarIdSquires
                                                    displayName:kJSQDemoAvatarDisplayNameSquires
                                                          media:photoItem];

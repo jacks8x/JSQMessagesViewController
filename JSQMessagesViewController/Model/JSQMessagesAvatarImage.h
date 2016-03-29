@@ -33,17 +33,19 @@
 /**
  *  The avatar image for a regular display state.
  */
-@property (nonatomic, strong) UIImage *avatarImage;
+@property (nonatomic, strong) NSString *avatarImageURL;
 
 /**
  *  The avatar image for a highlighted display state.
  */
-@property (nonatomic, strong) UIImage *avatarHighlightedImage;
+@property (nonatomic, strong) NSString *avatarHighlightedImageURL;
 
 /**
  *  Returns the placeholder image for an avatar to display if avatarImage is `nil`.
  */
 @property (nonatomic, strong, readonly) UIImage *avatarPlaceholderImage;
+
+@property NSUInteger diameter;
 
 /**
  *  Initializes and returns an avatar image object having the specified image.
@@ -54,7 +56,7 @@
  *
  *  @return An initialized `JSQMessagesAvatarImage` object if successful, `nil` otherwise.
  */
-+ (instancetype)avatarWithImage:(UIImage *)image;
++ (instancetype)avatarWithImageURL:(NSString *)imageURL;
 
 /**
  *  Initializes and returns an avatar image object having the specified placeholder image.
@@ -74,9 +76,10 @@
  *
  *  @return An initialized `JSQMessagesAvatarImage` object if successful, `nil` otherwise.
  */
-- (instancetype)initWithAvatarImage:(UIImage *)avatarImage
-                   highlightedImage:(UIImage *)highlightedImage
-                   placeholderImage:(UIImage *)placeholderImage NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAvatarImageURL:(NSString *)avatarImageURL
+                   highlightedImageURL:(NSString *)highlightedImageURL
+                   placeholderImage:(UIImage *)placeholderImage
+                   diameter:(NSUInteger)diameter NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Not a valid initializer.

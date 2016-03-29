@@ -41,6 +41,7 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UIView *avatarContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *unreadCountLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageBubbleContainerWidthConstraint;
 
@@ -61,6 +62,8 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 @property (assign, nonatomic) CGSize avatarViewSize;
 
 @property (weak, nonatomic, readwrite) UITapGestureRecognizer *tapGestureRecognizer;
+
+- (void)setUnreadCount:(NSUInteger)unreadCount;
 
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap;
 
@@ -329,6 +332,16 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
             }
         }
     });
+}
+
+- (void)setUnreadCount:(NSUInteger)unreadCount
+{
+    if (unreadCount == 0) {
+        [self.unreadCountLabel setHidden:YES];
+    }
+    else {
+        [self.unreadCountLabel setText:[NSString stringWithFormat:@"Unread %lu", unreadCount]];
+    }
 }
 
 #pragma mark - Getters
