@@ -28,10 +28,8 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 @interface JSQMessagesTypingIndicatorFooterView ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *bubbleImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImageViewRightHorizontalConstraint;
-
-@property (weak, nonatomic) IBOutlet UIImageView *typingIndicatorImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *typingIndicatorImageViewRightHorizontalConstraint;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bubbleImageViewRightHorizontalConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *typingIndicatorLabel;
 
 @end
 
@@ -60,7 +58,7 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     [self setTranslatesAutoresizingMaskIntoConstraints:NO];
     self.backgroundColor = [UIColor clearColor];
     self.userInteractionEnabled = NO;
-    self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
+//    self.typingIndicatorImageView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 #pragma mark - Reusable view
@@ -69,6 +67,11 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
 {
     [super setBackgroundColor:backgroundColor];
     self.bubbleImageView.backgroundColor = backgroundColor;
+}
+
+- (void)setTypingIndicatorText:(NSString *)indicatorText
+{
+    [self.typingIndicatorLabel setText:indicatorText];
 }
 
 #pragma mark - Typing indicator
@@ -82,34 +85,34 @@ const CGFloat kJSQMessagesTypingIndicatorFooterViewHeight = 46.0f;
     NSParameterAssert(messageBubbleColor != nil);
     NSParameterAssert(collectionView != nil);
     
-    CGFloat bubbleMarginMinimumSpacing = 6.0f;
-    CGFloat indicatorMarginMinimumSpacing = 26.0f;
+//    CGFloat bubbleMarginMinimumSpacing = 6.0f;
+//    CGFloat indicatorMarginMinimumSpacing = 26.0f;
     
     JSQMessagesBubbleImageFactory *bubbleImageFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     
     if (shouldDisplayOnLeft) {
         self.bubbleImageView.image = [bubbleImageFactory incomingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
         
-        CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
-        CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
-        CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
+//        CGFloat collectionViewWidth = CGRectGetWidth(collectionView.frame);
+//        CGFloat bubbleWidth = CGRectGetWidth(self.bubbleImageView.frame);
+//        CGFloat indicatorWidth = CGRectGetWidth(self.typingIndicatorImageView.frame);
         
-        CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
-        CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - indicatorWidth - indicatorMarginMinimumSpacing;
+//        CGFloat bubbleMarginMaximumSpacing = collectionViewWidth - bubbleWidth - bubbleMarginMinimumSpacing;
+//        CGFloat indicatorMarginMaximumSpacing = collectionViewWidth - /*indicatorWidth -*/ indicatorMarginMinimumSpacing;
         
-        self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
-        self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
+//        self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMaximumSpacing;
+//        self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMaximumSpacing;
     }
     else {
         self.bubbleImageView.image = [bubbleImageFactory outgoingMessagesBubbleImageWithColor:messageBubbleColor].messageBubbleImage;
         
-        self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
-        self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
+//        self.bubbleImageViewRightHorizontalConstraint.constant = bubbleMarginMinimumSpacing;
+//        self.typingIndicatorImageViewRightHorizontalConstraint.constant = indicatorMarginMinimumSpacing;
     }
     
     [self setNeedsUpdateConstraints];
     
-    self.typingIndicatorImageView.image = [[UIImage jsq_defaultTypingIndicatorImage] jsq_imageMaskedWithColor:ellipsisColor];
+//    self.typingIndicatorImageView.image = [[UIImage jsq_defaultTypingIndicatorImage] jsq_imageMaskedWithColor:ellipsisColor];
 }
 
 @end

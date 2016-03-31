@@ -83,6 +83,7 @@
  *  typingIndicatorDisplaysOnLeft, typingIndicatorMessageBubbleColor, typingIndicatorEllipsisColor.
  *
  *  @param indexPath The index path specifying the location of the supplementary view in the collection view. This value must not be `nil`.
+ *  @param indicatorText
  *
  *  @return A valid `JSQMessagesTypingIndicatorFooterView` object.
  */
@@ -97,5 +98,8 @@
  *  @return A valid `JSQMessagesLoadEarlierHeaderView` object.
  */
 - (JSQMessagesLoadEarlierHeaderView *)dequeueLoadEarlierMessagesViewHeaderForIndexPath:(NSIndexPath *)indexPath;
+
+- (void)setCurrentTypingUser:(NSString *)username;
+- (void)clearCurrentTypingUser;
 
 @end

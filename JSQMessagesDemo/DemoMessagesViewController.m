@@ -145,6 +145,12 @@
     /**
      *  Show the typing indicator to be shown
      */
+    NSMutableArray *userIds = [[self.demoData.users allKeys] mutableCopy];
+    [userIds removeObject:self.senderId];
+    NSString *randomUserId = userIds[arc4random_uniform((int)[userIds count])];
+    
+    [self.collectionView setCurrentTypingUser:[self.demoData.users objectForKey:randomUserId]];
+    
     self.showTypingIndicator = !self.showTypingIndicator;
     
     /**
@@ -167,11 +173,6 @@
      *  Allow typing indicator to show
      */
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        NSMutableArray *userIds = [[self.demoData.users allKeys] mutableCopy];
-        [userIds removeObject:self.senderId];
-        NSString *randomUserId = userIds[arc4random_uniform((int)[userIds count])];
-        
         JSQMessage *newMessage = nil;
         id<JSQMessageMediaData> newMediaData = nil;
         id newMediaAttachmentCopy = nil;

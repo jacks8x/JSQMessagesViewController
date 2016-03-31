@@ -30,6 +30,9 @@
 
 @interface JSQMessagesCollectionView () <JSQMessagesLoadEarlierHeaderViewDelegate>
 
+@property NSMutableArray *typingUser;
+@property NSString *typingIndicatorText;
+
 - (void)jsq_configureCollectionView;
 
 @end
@@ -77,6 +80,9 @@
     _typingIndicatorEllipsisColor = [_typingIndicatorMessageBubbleColor jsq_colorByDarkeningColorWithValue:0.3f];
 
     _loadEarlierMessagesHeaderTextColor = [UIColor jsq_messageBubbleBlueColor];
+    
+    self.typingUser = [[NSMutableArray alloc] init];
+    self.typingIndicatorText = @"";
 }
 
 - (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout
@@ -96,11 +102,40 @@
 
 #pragma mark - Typing indicator
 
+- (void)setCurrentTypingUser:(NSString *)username
+{
+    @synchronized (self.typingUser) {
+        [self.typingUser addObject:username];
+        
+        if ([self.typingUser count] == 1) {
+            self.typingIndicatorText = [NSString stringWithFormat:@"%@ is typing...", [self.typingUser objectAtIndex:0]];
+        }
+        else if ([self.typingUser count] == 2) {
+            self.typingIndicatorText = [NSString stringWithFormat:@"%@ and %@ are typing...", [self.typingUser objectAtIndex:0], [self.typingUser objectAtIndex:1]];
+        }
+        else if ([self.typingUser count] > 2) {
+            self.typingIndicatorText = [NSString stringWithFormat:@"%lu people are typing...", [self.typingUser count]];
+        }
+        else {
+            self.typingIndicatorText = @"";
+        }
+    }
+}
+
+- (void)clearCurrentTypingUser
+{
+    @synchronized (self.typingUser) {
+        [self.typingUser removeAllObjects];
+        self.typingIndicatorText = @"";
+    }
+}
+
 - (JSQMessagesTypingIndicatorFooterView *)dequeueTypingIndicatorFooterViewForIndexPath:(NSIndexPath *)indexPath
 {
     JSQMessagesTypingIndicatorFooterView *footerView = [super dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                                                                                  withReuseIdentifier:[JSQMessagesTypingIndicatorFooterView footerReuseIdentifier]
                                                                                         forIndexPath:indexPath];
+    [footerView setTypingIndicatorText:self.typingIndicatorText];
 
     [footerView configureWithEllipsisColor:self.typingIndicatorEllipsisColor
                         messageBubbleColor:self.typingIndicatorMessageBubbleColor
