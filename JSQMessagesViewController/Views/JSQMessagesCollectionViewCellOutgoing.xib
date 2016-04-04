@@ -134,7 +134,7 @@
                 <outlet property="textViewBottomVerticalSpaceConstraint" destination="UbF-Bl-Q7v" id="KHP-49-3u4"/>
                 <outlet property="textViewMarginHorizontalSpaceConstraint" destination="7rI-Nc-AK3" id="ciu-j6-IpH"/>
                 <outlet property="textViewTopVerticalSpaceConstraint" destination="RiG-21-Bqc" id="i3j-z0-feE"/>
-                <outlet property="unreadCountLabel" destination="5c7-RL-r85" id="dKJ-UE-V6q"/>
+                <outlet property="unreadCountLabel" destination="5c7-RL-r85" id="9rH-MF-cKQ"/>
             </connections>
             <point key="canvasLocation" x="371" y="145"/>
         </collectionViewCell>

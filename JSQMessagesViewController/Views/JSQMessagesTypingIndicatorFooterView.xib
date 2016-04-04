@@ -11,14 +11,14 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z1D-Tr-HPK" userLabel="Bubble Image View">
-                    <rect key="frame" x="6" y="6" width="149" height="34"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z1D-Tr-HPK" userLabel="Bubble Image View">
+                    <rect key="frame" x="6" y="6" width="121" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="365-TI-0fL"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Typing Indicator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ot-Ju-nzl">
-                    <rect key="frame" x="20" y="15" width="127" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Typing Indicator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ot-Ju-nzl">
+                    <rect key="frame" x="20" y="15" width="99" height="16"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -34,7 +34,7 @@
             </constraints>
             <connections>
                 <outlet property="bubbleImageView" destination="Z1D-Tr-HPK" id="WpE-rP-oYB"/>
-                <outlet property="typingIndicatorLabel" destination="7Ot-Ju-nzl" id="H18-67-2oo"/>
+                <outlet property="typingIndicatorLabel" destination="7Ot-Ju-nzl" id="EWC-qe-igm"/>
             </connections>
         </collectionReusableView>
     </objects>
