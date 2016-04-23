@@ -34,14 +34,11 @@
     return [JSQMessagesAvatarImage avatarImageWithPlaceholder:circlePlaceholderImage];
 }
 
-+ (JSQMessagesAvatarImage *)avatarImageWithImageURL:(NSString *)imageURL diameter:(NSUInteger)diameter
++ (JSQMessagesAvatarImage *)avatarImageWithImageURL:(NSString *)imageURL highlightedImageURL:(NSString *)highlightedImageURL placeholderImage:(UIImage *)placeholderImage diameter:(NSUInteger)diameter
 {
-//    UIImage *avatar = [JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter];
-//    UIImage *highlightedAvatar = [JSQMessagesAvatarImageFactory circularAvatarHighlightedImage:image withDiameter:diameter];
-
     return [[JSQMessagesAvatarImage alloc] initWithAvatarImageURL:imageURL
-                                              highlightedImageURL:imageURL
-                                              placeholderImage:nil
+                                              highlightedImageURL:highlightedImageURL
+                                              placeholderImage:placeholderImage
                                                          diameter:diameter];
 }
 
@@ -79,6 +76,11 @@
 //                                              highlightedImage:avatarHighlightedImage
 //                                              placeholderImage:avatarImage];
 //}
+
++ (UIImage *)circularAvatarPlaceholderImage:(NSString *)initials backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor font:(UIFont *)font diameter:(NSUInteger)diameter
+{
+    return [JSQMessagesAvatarImageFactory jsq_imageWitInitials:initials backgroundColor:backgroundColor textColor:textColor font:font diameter:diameter];
+}
 
 #pragma mark - Private
 

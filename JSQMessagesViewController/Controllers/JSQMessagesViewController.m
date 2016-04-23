@@ -18,6 +18,7 @@
 
 #import <AFNetworking/AFNetworking.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 #import "JSQMessagesViewController.h"
 
 #import "JSQMessagesCollectionViewFlowLayoutInvalidationContext.h"
@@ -523,15 +524,87 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
         if (avatarImageDataSource != nil) {
 
             NSString *avatarImageURL = [avatarImageDataSource avatarImageURL];
+            NSString *avatarHighlightedImageURL = [avatarImageDataSource avatarHighlightedImageURL];
             NSUInteger diameter = [avatarImageDataSource diameter];
+            
             if (avatarImageURL != nil) {
                 NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:avatarImageURL]];
-                [cell.avatarImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
+                [cell.avatarImageView setImageWithURLRequest:request placeholderImage:[avatarImageDataSource avatarPlaceholderImage] success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
                     [cell.avatarImageView setImage:[JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter]];
                 } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
+                    if (error != nil) {
+                        NSLog(@"Error: %@", error);
+                    }
                     
+                    if (response != nil) {
+                        NSLog(@"Error: Status code=%ld", [response statusCode]);
+                    }
                 }];
+                
                 cell.avatarImageView.highlightedImage = nil;
+            }
+            else {
+                [cell.avatarImageView setImage:[avatarImageDataSource avatarPlaceholderImage]];
+            }
+            
+            if (avatarHighlightedImageURL != nil) {
+                NSCharacterSet *expectedCharSet = [NSCharacterSet URLQueryAllowedCharacterSet];
+                NSURL *url = [NSURL URLWithString:[avatarHighlightedImageURL stringByAddingPercentEncodingWithAllowedCharacters:expectedCharSet]];
+                NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+                NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                    NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
+                    
+                    if (error != nil) {
+                        NSLog(@"Error: %@", error);
+                        return;
+                    }
+                    else {
+                        if ([resp statusCode] >= 200 && [resp statusCode] < 300) {
+                            UIImage *image = [UIImage imageWithData:data];
+                            [cell.avatarImageView setHighlightedImage:[JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter]];
+                        }
+                        else {
+                            NSLog(@"Error: Status code=%ld", [resp statusCode]);
+                            return;
+                        }
+                    }
+                }];
+                [dataTask resume];
+            }
+            else {
+                if (avatarImageURL != nil) {
+                    NSCharacterSet *expectedCharSet = [NSCharacterSet URLQueryAllowedCharacterSet];
+                    NSURL *url = [NSURL URLWithString:[avatarImageURL stringByAddingPercentEncodingWithAllowedCharacters:expectedCharSet]];
+                    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+                    NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                        NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
+                        
+                        if (error != nil) {
+                            NSLog(@"Error: %@", error);
+                            return;
+                        }
+                        else {
+                            if ([resp statusCode] >= 200 && [resp statusCode] < 300) {
+                                UIImage *image = [UIImage imageWithData:data];
+                                CIFilter *filter = [CIFilter filterWithName:@"CIPhotoEffectFade"];
+                                [filter setDefaults];
+                                CIImage *inputImage = [CIImage imageWithCGImage:[image CGImage]];
+                                [filter setValue:inputImage forKey:kCIInputImageKey];
+                                CIImage *outputImage = [filter outputImage];
+                                CIContext *context = [CIContext contextWithOptions:nil];
+                                CGImageRef cgimg = [context createCGImage:outputImage fromRect:[inputImage extent]];
+                                UIImage *filteredImage = [JSQMessagesAvatarImageFactory circularAvatarImage:[UIImage imageWithCGImage:cgimg] withDiameter:diameter];;
+                                
+                                cell.avatarImageView.highlightedImage = filteredImage;
+                            }
+                            else {
+                                NSLog(@"Error: Status code=%ld", [resp statusCode]);
+                                return;
+                            }
+                        }
+                    }];
+                    [dataTask resume];
+                }
             }
         }
     }

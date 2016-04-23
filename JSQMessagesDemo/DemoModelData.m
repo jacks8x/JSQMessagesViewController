@@ -49,17 +49,52 @@
          *
          *  If you are not using avatars, ignore this.
          */
+        
+        /**
+         *  Placeholders
+         */
+        UIImage *cookPlaceholderImage = [JSQMessagesAvatarImageFactory circularAvatarPlaceholderImage:@"TC"
+                                                                                    backgroundColor:[UIColor lightGrayColor]
+                                                                                          textColor:[UIColor darkGrayColor]
+                                                                                               font:[UIFont systemFontOfSize:13.0f]
+                                                                                           diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        UIImage *jobsPlaceholderImage = [JSQMessagesAvatarImageFactory circularAvatarPlaceholderImage:@"SJ"
+                                                                                      backgroundColor:[UIColor lightGrayColor]
+                                                                                            textColor:[UIColor darkGrayColor]
+                                                                                                 font:[UIFont systemFontOfSize:13.0f]
+                                                                                             diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        UIImage *wozPlaceholderImage = [JSQMessagesAvatarImageFactory circularAvatarPlaceholderImage:@"SW"
+                                                                                      backgroundColor:[UIColor lightGrayColor]
+                                                                                            textColor:[UIColor darkGrayColor]
+                                                                                                 font:[UIFont systemFontOfSize:13.0f]
+                                                                                             diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        UIImage *jsqPlaceholderImage = [JSQMessagesAvatarImageFactory circularAvatarPlaceholderImage:@"JSQ"
+                                                                                     backgroundColor:[UIColor lightGrayColor]
+                                                                                           textColor:[UIColor darkGrayColor]
+                                                                                                font:[UIFont systemFontOfSize:13.0f]
+                                                                                            diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
+        
+        /**
+         *  Avatar images
+         */
         JSQMessagesAvatarImage *cookImage = [JSQMessagesAvatarImageFactory avatarImageWithImageURL:@"http://a2.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTE5NDg0MDU1MzM0OTc5MDg3.jpg"
+                                                                               highlightedImageURL:@"http://a2.files.biography.com/image/upload/c_fill,cs_srgb,dpr_1.0,g_face,h_300,q_80,w_300/MTE5NDg0MDU1MzM0OTc5MDg3.jpg"
+                                                                                  placeholderImage:jobsPlaceholderImage
                                                                                           diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         JSQMessagesAvatarImage *jobsImage = [JSQMessagesAvatarImageFactory avatarImageWithImageURL:@"https://pbs.twimg.com/profile_images/89328493/stevejobs.jpg"
+                                                                               highlightedImageURL:@"https://pbs.twimg.com/profile_images/89328493/stevejobs.jpg"
+                                                                                  placeholderImage:cookPlaceholderImage
                                                                                           diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
         JSQMessagesAvatarImage *wozImage = [JSQMessagesAvatarImageFactory avatarImageWithImageURL:@"http://celebirthdays.net/cdn/thumbs/large/steve-wozniak.jpg"
+                                                                              highlightedImageURL:@"http://celebirthdays.net/cdn/thumbs/large/steve-wozniak.jpg"
+                                                                                 placeholderImage:wozPlaceholderImage
                                                                                          diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
         
         JSQMessagesAvatarImage *jsqImage = [JSQMessagesAvatarImageFactory avatarImageWithImageURL:@"http://cdn.business2community.com/wp-content/uploads/2014/04/profile-picture.jpg"
+                                                                              highlightedImageURL:@"http://cdn.business2community.com/wp-content/uploads/2014/04/profile-picture.jpg"
+                                                                                 placeholderImage:jsqPlaceholderImage
                                                                                          diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
-
         
         self.avatars = @{ kJSQDemoAvatarIdSquires : jsqImage,
                           kJSQDemoAvatarIdCook : cookImage,

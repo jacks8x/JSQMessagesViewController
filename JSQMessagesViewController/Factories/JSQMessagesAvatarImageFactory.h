@@ -44,12 +44,14 @@
  *  of the returned `JSQMessagesAvatarImage` object. This image is then copied and has a transparent black mask applied to it, 
  *  which is used for the `avatarHighlightedImage` property of the returned `JSQMessagesAvatarImage` object.
  *
- *  @param image    An image object that represents an avatar image. This value must not be `nil`.
+ *  @param imageURL    An image URL that represents an avatar image. This value must not be `nil`.
+ *  @param highlightedImageURL    An image URL that represents an highlighted avatar image. If this value is `nil`, this will be replaced with `imageURL`.
+ *  @param placeholderImage     An image object to be used as a placeholder.
  *  @param diameter An integer value specifying the diameter size of the avatar in points. This value must be greater than `0`.
  *
  *  @return An initialized `JSQMessagesAvatarImage` object if created successfully, `nil` otherwise.
  */
-+ (JSQMessagesAvatarImage *)avatarImageWithImageURL:(NSString *)imageURL diameter:(NSUInteger)diameter;
++ (JSQMessagesAvatarImage *)avatarImageWithImageURL:(NSString *)imageURL highlightedImageURL:(NSString *)highlightedImageURL placeholderImage:(UIImage *)placeholderImage diameter:(NSUInteger)diameter;
 
 /**
  *  Returns a copy of the specified image that is cropped to a circle with the given diameter.
@@ -95,5 +97,19 @@
 //                                              textColor:(UIColor *)textColor
 //                                                   font:(UIFont *)font
 //                                               diameter:(NSUInteger)diameter;
+
+/**
+ *  Creates and returns a `UIImage` object for a placeholder with a circular shape that displays the specified userInitials
+ *  with the given backgroundColor, textColor, font, and diameter.
+ *
+ *  @param initials        The user initials to display in the avatar image. This value must not be `nil`.
+ *  @param backgroundColor The background color of the avatar. This value must not be `nil`.
+ *  @param textColor       The color of the text of the userInitials. This value must not be `nil`.
+ *  @param font            The font applied to userInitials. This value must not be `nil`.
+ *  @param diameter        The diameter of the avatar image. This value must be greater than `0`.
+ *
+ *  @return `UIImage` object if created successfully, `nil` otherwise.
+ */
++ (UIImage *)circularAvatarPlaceholderImage:(NSString *)initials backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor font:(UIFont *)font diameter:(NSUInteger)diameter;
 
 @end

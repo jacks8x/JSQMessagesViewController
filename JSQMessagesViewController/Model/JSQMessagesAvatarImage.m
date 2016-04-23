@@ -46,7 +46,7 @@
                    placeholderImage:(UIImage *)placeholderImage
                    diameter:(NSUInteger)diameter
 {
-//    NSParameterAssert(placeholderImage != nil);
+    NSParameterAssert(placeholderImage != nil);
     
     self = [super init];
     if (self) {
