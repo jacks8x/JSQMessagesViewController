@@ -17,6 +17,7 @@
 //
 
 #import "JSQMessagesAvatarImage.h"
+#import "JSQMessagesAvatarImageFactory.h"
 #import "JSQMessagesCollectionViewFlowLayout.h"
 
 @implementation JSQMessagesAvatarImage 
@@ -26,7 +27,11 @@
 + (instancetype)avatarWithImageURL:(NSString *)imageURL
 {
     NSParameterAssert(imageURL != nil);
-    UIImage *placeHolderImage = nil;
+    UIImage *placeHolderImage = [JSQMessagesAvatarImageFactory circularAvatarPlaceholderImage:@""
+                                                                              backgroundColor:[UIColor lightGrayColor]
+                                                                                    textColor:[UIColor darkGrayColor]
+                                                                                         font:[UIFont systemFontOfSize:13.0f]
+                                                                                     diameter:kJSQMessagesCollectionViewAvatarSizeDefault];
     return [[JSQMessagesAvatarImage alloc] initWithAvatarImageURL:imageURL
                                               highlightedImageURL:imageURL
                                               placeholderImage:placeHolderImage

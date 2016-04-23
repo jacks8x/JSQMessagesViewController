@@ -36,9 +36,13 @@
 
 + (JSQMessagesAvatarImage *)avatarImageWithImageURL:(NSString *)imageURL highlightedImageURL:(NSString *)highlightedImageURL placeholderImage:(UIImage *)placeholderImage diameter:(NSUInteger)diameter
 {
+    UIImage *circlePlaceholderImage = [JSQMessagesAvatarImageFactory jsq_circularImage:placeholderImage
+                                                                          withDiameter:diameter
+                                                                      highlightedColor:nil];
+    
     return [[JSQMessagesAvatarImage alloc] initWithAvatarImageURL:imageURL
                                               highlightedImageURL:highlightedImageURL
-                                              placeholderImage:placeholderImage
+                                              placeholderImage:circlePlaceholderImage
                                                          diameter:diameter];
 }
 
@@ -55,27 +59,6 @@
                                                withDiameter:diameter
                                            highlightedColor:[UIColor colorWithWhite:0.1f alpha:0.3f]];
 }
-
-//+ (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
-//                                        backgroundColor:(UIColor *)backgroundColor
-//                                              textColor:(UIColor *)textColor
-//                                                   font:(UIFont *)font
-//                                               diameter:(NSUInteger)diameter
-//{
-//    UIImage *avatarImage = [JSQMessagesAvatarImageFactory jsq_imageWitInitials:userInitials
-//                                                               backgroundColor:backgroundColor
-//                                                                     textColor:textColor
-//                                                                          font:font
-//                                                                      diameter:diameter];
-//
-//    UIImage *avatarHighlightedImage = [JSQMessagesAvatarImageFactory jsq_circularImage:avatarImage
-//                                                                          withDiameter:diameter
-//                                                                      highlightedColor:[UIColor colorWithWhite:0.1f alpha:0.3f]];
-//
-//    return [[JSQMessagesAvatarImage alloc] initWithAvatarImage:avatarImage
-//                                              highlightedImage:avatarHighlightedImage
-//                                              placeholderImage:avatarImage];
-//}
 
 + (UIImage *)circularAvatarPlaceholderImage:(NSString *)initials backgroundColor:(UIColor *)backgroundColor textColor:(UIColor *)textColor font:(UIFont *)font diameter:(NSUInteger)diameter
 {

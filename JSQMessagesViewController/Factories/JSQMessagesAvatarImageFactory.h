@@ -75,30 +75,6 @@
 + (UIImage *)circularAvatarHighlightedImage:(UIImage *)image withDiameter:(NSUInteger)diameter;
 
 /**
- *  Creates and returns a `JSQMessagesAvatarImage` object with a circular shape that displays the specified userInitials
- *  with the given backgroundColor, textColor, font, and diameter.
- *
- *  @param userInitials    The user initials to display in the avatar image. This value must not be `nil`.
- *  @param backgroundColor The background color of the avatar. This value must not be `nil`.
- *  @param textColor       The color of the text of the userInitials. This value must not be `nil`.
- *  @param font            The font applied to userInitials. This value must not be `nil`.
- *  @param diameter        The diameter of the avatar image. This value must be greater than `0`.
- *
- *  @return An initialized `JSQMessagesAvatarImage` object if created successfully, `nil` otherwise.
- *
- *  @discussion This method does not attempt to detect or correct incompatible parameters. 
- *  That is to say, you are responsible for providing a font size and diameter that make sense.
- *  For example, a font size of `14.0f` and a diameter of `34.0f` will result in an avatar similar to Messages in iOS 7. 
- *  However, a font size `30.0f` and diameter of `10.0f` will not produce a desirable image.
- *  Further, this method does not check the length of userInitials. It is recommended that you pass a string of length `2` or `3`.
- */
-//+ (JSQMessagesAvatarImage *)avatarImageWithUserInitials:(NSString *)userInitials
-//                                        backgroundColor:(UIColor *)backgroundColor
-//                                              textColor:(UIColor *)textColor
-//                                                   font:(UIFont *)font
-//                                               diameter:(NSUInteger)diameter;
-
-/**
  *  Creates and returns a `UIImage` object for a placeholder with a circular shape that displays the specified userInitials
  *  with the given backgroundColor, textColor, font, and diameter.
  *

@@ -561,7 +561,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                     else {
                         if ([resp statusCode] >= 200 && [resp statusCode] < 300) {
                             UIImage *image = [UIImage imageWithData:data];
-                            [cell.avatarImageView setHighlightedImage:[JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter]];
+                            [cell.avatarImageView setHighlightedImage:[JSQMessagesAvatarImageFactory circularAvatarHighlightedImage:image withDiameter:diameter]];
                         }
                         else {
                             NSLog(@"Error: Status code=%ld", [resp statusCode]);
@@ -586,16 +586,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                         else {
                             if ([resp statusCode] >= 200 && [resp statusCode] < 300) {
                                 UIImage *image = [UIImage imageWithData:data];
-                                CIFilter *filter = [CIFilter filterWithName:@"CIPhotoEffectFade"];
-                                [filter setDefaults];
-                                CIImage *inputImage = [CIImage imageWithCGImage:[image CGImage]];
-                                [filter setValue:inputImage forKey:kCIInputImageKey];
-                                CIImage *outputImage = [filter outputImage];
-                                CIContext *context = [CIContext contextWithOptions:nil];
-                                CGImageRef cgimg = [context createCGImage:outputImage fromRect:[inputImage extent]];
-                                UIImage *filteredImage = [JSQMessagesAvatarImageFactory circularAvatarImage:[UIImage imageWithCGImage:cgimg] withDiameter:diameter];;
-                                
-                                cell.avatarImageView.highlightedImage = filteredImage;
+                                [cell.avatarImageView setHighlightedImage:[JSQMessagesAvatarImageFactory circularAvatarHighlightedImage:image withDiameter:diameter]];
                             }
                             else {
                                 NSLog(@"Error: Status code=%ld", [resp statusCode]);
