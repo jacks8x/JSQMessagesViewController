@@ -495,7 +495,24 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             cell.cachedMediaView = [[UIImageView alloc] initWithFrame:CGRectMake(2, 2, cell.mediaView.frame.size.width, cell.mediaView.frame.size.height)];
             __weak JSQMessagesCollectionViewCell *weakCell = cell;
             [(UIImageView *)cell.cachedMediaView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:imageURL]] placeholderImage:nil success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
-                [((UIImageView *)weakCell.cachedMediaView) setImage:image];
+                CGSize newSize = CGSizeMake(mediaViewRect.size.height * 2, mediaViewRect.size.width * 2);
+                float widthRatio = newSize.width / image.size.width;
+                float heightRatio = newSize.height / image.size.height;
+                
+                if(widthRatio > heightRatio) {
+                    newSize = CGSizeMake(image.size.width * heightRatio, image.size.height * heightRatio);
+                }
+                else {
+                    newSize = CGSizeMake(image.size.width * widthRatio, image.size.height * widthRatio);
+                }
+                
+                UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+                [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+                UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+                
+                [((UIImageView *)weakCell.cachedMediaView) setImage:newImage];
+                [((UIImageView *)weakCell.cachedMediaView) setContentMode:UIViewContentModeScaleAspectFill];
                 [weakCell.cachedMediaView setFrame:CGRectMake(2, 2, mediaViewRect.size.width, mediaViewRect.size.height)];
                 
                 [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:(UIImageView *)weakCell.cachedMediaView isOutgoing:isOutgoingMessage];

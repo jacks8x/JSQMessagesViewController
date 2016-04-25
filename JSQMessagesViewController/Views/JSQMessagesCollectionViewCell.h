@@ -205,4 +205,6 @@
  */
 + (void)registerMenuAction:(SEL)action;
 
+- (void)setUnreadCount:(NSUInteger)unreadCount;
+
 @end

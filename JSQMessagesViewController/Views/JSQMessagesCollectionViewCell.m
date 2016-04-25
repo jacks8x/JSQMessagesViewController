@@ -63,8 +63,6 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 
 @property (weak, nonatomic, readwrite) UITapGestureRecognizer *tapGestureRecognizer;
 
-- (void)setUnreadCount:(NSUInteger)unreadCount;
-
 - (void)jsq_handleTapGesture:(UITapGestureRecognizer *)tap;
 
 - (void)jsq_updateConstraint:(NSLayoutConstraint *)constraint withConstant:(CGFloat)constant;
