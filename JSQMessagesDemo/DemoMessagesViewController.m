@@ -152,7 +152,7 @@
     [self.collectionView setCurrentTypingUser:[self.demoData.users objectForKey:randomUserId]];
     
     self.showTypingIndicator = !self.showTypingIndicator;
-    
+    return;
     /**
      *  Scroll to actually view the indicator
      */
