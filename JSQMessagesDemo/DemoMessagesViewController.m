@@ -149,10 +149,10 @@
     [userIds removeObject:self.senderId];
     NSString *randomUserId = userIds[arc4random_uniform((int)[userIds count])];
     
-    [self.collectionView setCurrentTypingUser:[self.demoData.users objectForKey:randomUserId]];
+    [self.collectionView setCurrentTypingUser:[self.demoData.users objectForKey:randomUserId] userId:randomUserId];
     
     self.showTypingIndicator = !self.showTypingIndicator;
-    return;
+
     /**
      *  Scroll to actually view the indicator
      */
