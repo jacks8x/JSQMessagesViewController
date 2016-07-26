@@ -544,7 +544,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             NSString *avatarHighlightedImageURL = [avatarImageDataSource avatarHighlightedImageURL];
             NSUInteger diameter = [avatarImageDataSource diameter];
             
-            if (avatarImageURL != nil) {
+            if (avatarImageURL != nil && [avatarImageURL length] > 0) {
                 NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:avatarImageURL]];
                 [cell.avatarImageView setImageWithURLRequest:request placeholderImage:[avatarImageDataSource avatarPlaceholderImage] success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
                     [cell.avatarImageView setImage:[JSQMessagesAvatarImageFactory circularAvatarImage:image withDiameter:diameter]];
@@ -589,7 +589,7 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
                 [dataTask resume];
             }
             else {
-                if (avatarImageURL != nil) {
+                if (avatarImageURL != nil && [avatarImageURL length] > 0) {
                     NSCharacterSet *expectedCharSet = [NSCharacterSet URLQueryAllowedCharacterSet];
                     NSURL *url = [NSURL URLWithString:[avatarImageURL stringByAddingPercentEncodingWithAllowedCharacters:expectedCharSet]];
                     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
