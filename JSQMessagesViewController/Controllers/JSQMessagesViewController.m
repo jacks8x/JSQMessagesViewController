@@ -44,6 +44,8 @@
 #import "NSBundle+JSQMessages.h"
 
 #import "JSQPhotoMediaItem.h"
+#import "JSQVideoMediaItem.h"
+#import "JSQFileMediaItem.h"
 #import "JSQMessagesMediaViewBubbleImageMasker.h"
 
 static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObservingContext;
@@ -520,6 +522,14 @@ static void * kJSQMessagesKeyValueObservingContext = &kJSQMessagesKeyValueObserv
             } failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, NSError * _Nonnull error) {
                 
             }];
+        }
+        else if ([messageMedia isKindOfClass:[JSQVideoMediaItem class]]) {
+            ((JSQVideoMediaItem *)messageMedia).appliesMediaViewMaskAsOutgoing = isOutgoingMessage;
+            cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
+        }
+        else if ([messageMedia isKindOfClass:[JSQFileMediaItem class]]) {
+            ((JSQFileMediaItem *)messageMedia).appliesMediaViewMaskAsOutgoing = isOutgoingMessage;
+            cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         }
         else {
             cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
