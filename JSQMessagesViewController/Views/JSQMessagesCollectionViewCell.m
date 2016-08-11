@@ -336,10 +336,11 @@ static NSMutableSet *jsqMessagesCollectionViewCellActions = nil;
 - (void)setUnreadCount:(NSUInteger)unreadCount
 {
     if (unreadCount == 0) {
-        [self.unreadCountLabel setHidden:YES];
+        //[self.unreadCountLabel setHidden:YES];
+        self.unreadCountLabel.text = @"既読";
     }
     else {
-        [self.unreadCountLabel setText:[NSString stringWithFormat:@"Unread %lu", unreadCount]];
+        [self.unreadCountLabel setText:[NSString stringWithFormat:@"未読"]];
     }
 }
 
