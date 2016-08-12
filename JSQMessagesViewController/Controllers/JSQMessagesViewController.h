@@ -174,6 +174,9 @@
  */
 @property (assign, nonatomic) CGFloat topContentAdditionalInset;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomLayoutGuide;
+
 #pragma mark - Class methods
 
 /**
