@@ -35,11 +35,21 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egu-Nn-duW">
+                    <rect key="frame" x="0.0" y="149" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Nvi-Da-WL3"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
                 <constraint firstItem="TFB-ZJ-4LI" firstAttribute="top" secondItem="0Ms-a6-YUP" secondAttribute="top" constant="18" id="6Th-UH-S2Y"/>
                 <constraint firstAttribute="trailing" secondItem="R23-Bc-WR9" secondAttribute="trailing" constant="28" id="8OM-yF-mAf"/>
+                <constraint firstItem="egu-Nn-duW" firstAttribute="leading" secondItem="0Ms-a6-YUP" secondAttribute="leading" id="8ju-mv-TSW"/>
+                <constraint firstAttribute="trailing" secondItem="egu-Nn-duW" secondAttribute="trailing" id="9dP-mo-9Bq"/>
                 <constraint firstItem="R23-Bc-WR9" firstAttribute="leading" secondItem="0Ms-a6-YUP" secondAttribute="leading" constant="28" id="BNu-Qp-Cdf"/>
+                <constraint firstAttribute="bottom" secondItem="egu-Nn-duW" secondAttribute="bottom" id="EMG-ff-gxx"/>
                 <constraint firstItem="TFB-ZJ-4LI" firstAttribute="leading" secondItem="0Ms-a6-YUP" secondAttribute="leading" constant="28" id="FS9-9m-l3Y"/>
                 <constraint firstItem="R23-Bc-WR9" firstAttribute="top" secondItem="TFB-ZJ-4LI" secondAttribute="bottom" constant="14" id="Gff-HQ-g00"/>
                 <constraint firstAttribute="trailing" secondItem="TFB-ZJ-4LI" secondAttribute="trailing" constant="28" id="KRQ-fh-rMw"/>
