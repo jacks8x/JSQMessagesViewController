@@ -50,6 +50,8 @@ FOUNDATION_EXPORT const CGFloat kJSQMessagesLoadEarlierHeaderViewHeight;
  *  and can be used as a way for the user to load previously sent messages.
  */
 @interface JSQMessagesLoadEarlierHeaderView : UICollectionReusableView
+@property (weak, nonatomic) IBOutlet UILabel *headerTitle1;
+@property (weak, nonatomic) IBOutlet UILabel *headerTitle2;
 
 /**
  *  The object that acts as the delegate of the header view.

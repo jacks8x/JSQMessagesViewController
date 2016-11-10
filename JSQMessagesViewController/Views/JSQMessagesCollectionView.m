@@ -192,7 +192,13 @@
 
     headerView.loadButton.tintColor = self.loadEarlierMessagesHeaderTextColor;
     headerView.delegate = self;
-
+    if (![self.headerTitleString1 isEqualToString:@""] && self.headerTitleString1 != nil) {
+        headerView.headerTitle1.text = self.headerTitleString1;
+    }
+    if (![self.headerTitleString2 isEqualToString:@""] && self.headerTitleString2 != nil) {
+        headerView.headerTitle2.text = self.headerTitleString2;
+    }
+    
     return headerView;
 }
 
