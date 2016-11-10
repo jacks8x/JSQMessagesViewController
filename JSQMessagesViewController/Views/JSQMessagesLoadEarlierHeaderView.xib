@@ -15,6 +15,7 @@
                     <rect key="frame" x="28" y="18" width="264" height="54"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="i3t-fR-rHG"/>
+                        <constraint firstAttribute="width" constant="264" id="uN3-UD-TUP"/>
                     </constraints>
                     <string key="text">依頼に関すること以外のやりとりは禁止です。
 誹謗中傷・勧誘などの行為は禁止しております。
@@ -27,6 +28,7 @@
                     <rect key="frame" x="28" y="86" width="264" height="45"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="47c-pc-f30"/>
+                        <constraint firstAttribute="width" constant="264" id="Bzo-bH-XT0"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="P73-Ds-tiT"/>
                     </constraints>
                     <string key="text">おしごと完了から1週間後：送受信ができなくなります。
@@ -45,14 +47,12 @@
             </subviews>
             <constraints>
                 <constraint firstItem="TFB-ZJ-4LI" firstAttribute="top" secondItem="0Ms-a6-YUP" secondAttribute="top" constant="18" id="6Th-UH-S2Y"/>
-                <constraint firstAttribute="trailing" secondItem="R23-Bc-WR9" secondAttribute="trailing" constant="28" id="8OM-yF-mAf"/>
                 <constraint firstItem="egu-Nn-duW" firstAttribute="leading" secondItem="0Ms-a6-YUP" secondAttribute="leading" id="8ju-mv-TSW"/>
                 <constraint firstAttribute="trailing" secondItem="egu-Nn-duW" secondAttribute="trailing" id="9dP-mo-9Bq"/>
-                <constraint firstItem="R23-Bc-WR9" firstAttribute="leading" secondItem="0Ms-a6-YUP" secondAttribute="leading" constant="28" id="BNu-Qp-Cdf"/>
                 <constraint firstAttribute="bottom" secondItem="egu-Nn-duW" secondAttribute="bottom" id="EMG-ff-gxx"/>
-                <constraint firstItem="TFB-ZJ-4LI" firstAttribute="leading" secondItem="0Ms-a6-YUP" secondAttribute="leading" constant="28" id="FS9-9m-l3Y"/>
                 <constraint firstItem="R23-Bc-WR9" firstAttribute="top" secondItem="TFB-ZJ-4LI" secondAttribute="bottom" constant="14" id="Gff-HQ-g00"/>
-                <constraint firstAttribute="trailing" secondItem="TFB-ZJ-4LI" secondAttribute="trailing" constant="28" id="KRQ-fh-rMw"/>
+                <constraint firstItem="TFB-ZJ-4LI" firstAttribute="centerX" secondItem="0Ms-a6-YUP" secondAttribute="centerX" id="iNt-SG-qGe"/>
+                <constraint firstItem="R23-Bc-WR9" firstAttribute="centerX" secondItem="0Ms-a6-YUP" secondAttribute="centerX" id="zSV-KA-mfS"/>
             </constraints>
             <connections>
                 <outlet property="headerTitle1" destination="TFB-ZJ-4LI" id="sMn-JC-RZ1"/>
