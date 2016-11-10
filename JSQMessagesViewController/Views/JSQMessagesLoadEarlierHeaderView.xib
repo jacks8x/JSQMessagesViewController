@@ -11,28 +11,23 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TFB-ZJ-4LI">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TFB-ZJ-4LI">
                     <rect key="frame" x="28" y="18" width="264" height="54"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="54" id="i3t-fR-rHG"/>
                         <constraint firstAttribute="width" constant="264" id="uN3-UD-TUP"/>
                     </constraints>
-                    <string key="text">依頼に関すること以外のやりとりは禁止です。
-誹謗中傷・勧誘などの行為は禁止しております。
-また、メッセージには有効期限があります。</string>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R23-Bc-WR9">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R23-Bc-WR9">
                     <rect key="frame" x="28" y="86" width="264" height="45"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="47c-pc-f30"/>
                         <constraint firstAttribute="width" constant="264" id="Bzo-bH-XT0"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="P73-Ds-tiT"/>
                     </constraints>
-                    <string key="text">おしごと完了から1週間後：送受信ができなくなります。
-おしごと完了から1ヶ月後：閲覧ができなくなります。</string>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
